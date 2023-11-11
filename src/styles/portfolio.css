@@ -1,0 +1,138 @@
+* {
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+p {
+    padding-top: 0.15em;
+    margin: 0;
+}
+
+.quote {
+    font-style: italic;
+    font-family: initial;
+    font-size: larger;
+}
+
+main {
+    width: 40%;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.project {
+    margin: 10px 0;
+}
+
+a {
+    color: #007BFF;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.skills-images {
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.timeline { margin-bottom: 30px; }
+
+.timeline .title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.timeline-list {
+    list-style-type: none;
+}
+
+.timeline-item { position: relative; }
+
+.timeline-item:not(:last-child) { margin-bottom: 20px; }
+
+.timeline-item-title {
+    line-height: 1.3;
+    margin-bottom: 7px;
+}
+
+.timeline-list span {
+    line-height: 1.6;
+}
+
+.timeline-item:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: -30px;
+    width: 1px;
+    height: calc(100% + 50px);
+}
+
+.timeline-item::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: -33px;
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+}
+
+.timeline-text {
+    line-height: 1.6;
+}
+
+.company-logo {
+    width: 150px;
+    height: auto;
+    margin-right: 15px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    main {
+        width: 90%;
+    }
+}
