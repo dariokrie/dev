@@ -27,6 +27,8 @@ h1 {
 
 p {
     padding-top: 0.15em;
+    font-family: initial;
+    font-size: large;
     margin: 0;
 }
 
@@ -56,6 +58,8 @@ h2 {
 
 a {
     color: #007BFF;
+    font-family: initial;
+    font-size: large;
 }
 
 footer {
