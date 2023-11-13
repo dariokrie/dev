@@ -20,13 +20,7 @@ header {
     width: 100%;
 }
 
-h1 {
-    margin: 0;
-    font-size: 2em;
-}
-
 p {
-    padding-top: 0.15em;
     font-family: initial;
     font-size: large;
     margin: 0;
@@ -47,13 +41,23 @@ main {
     margin: 20px 0;
 }
 
+h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
 h2 {
     font-size: 1.5em;
     font-weight: bold;
+    margin-bottom: 5px;
+}
+
+h3 {
+    margin-top: 0;
 }
 
 .project {
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 a {
@@ -78,7 +82,23 @@ footer {
     gap: 10px;
 }
 
-.timeline { margin-bottom: 30px; }
+.skills-container {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+}
+
+.skills-category {
+    margin: 10px 0;
+}
+
+.skills-category h4 {
+    margin-top: initial;
+    padding-bottom: 0.01em;
+}
+
+.timeline { margin-bottom: 1em; }
 
 .timeline .title-wrapper {
     display: flex;
