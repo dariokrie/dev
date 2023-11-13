@@ -49,6 +49,14 @@ h3 {
     text-align: center;
 }
 
+.article-reference {
+    text-align: left;
+}
+
+.article-link {
+    color: blue;
+}
+
 .article-date {
     color: #777;
     font-size: 0.9em;
