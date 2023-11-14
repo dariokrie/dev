@@ -33,7 +33,7 @@ p {
 }
 
 main {
-    width: 40%;
+    width: 800px;
     background-color: #fff;
     border-radius: 5px;
     padding: 20px;
@@ -64,6 +64,10 @@ a {
     color: #007BFF;
     font-family: initial;
     font-size: large;
+}
+
+a:visited {
+    color: blueviolet;
 }
 
 footer {
