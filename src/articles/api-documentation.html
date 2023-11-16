@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../styles/articles.css">
+    <title>API Documentation - Dario Krieger</title>
+</head>
+<body>
+  <header>
+    <a href="../portfolio.html"><== back - dariokrie.dev</a>
+  </header>
+  <main>
+    <article>
+      <h1>API Documentation</h1>
+      <h3>With Swagger/OpenAPI in ASP.NET</h3>
+      <p class="article-date">Published on November 16, 2023 by Dario Krieger</p>
+      <p>
+        Documenting APIs is vital as it provides clear instructions and usage guidelines for developers, enabling quicker onboarding, 
+        reducing errors, aiding troubleshooting, ensuring consistency in usage, facilitating updates, and ultimately making the API more 
+        accessible and appealing to users. Comprehensive documentation acts as a crucial resource, bridging the gap between API creators 
+        and users, fostering better understanding, and improving the overall development experience.
+      </p>
+      <h2>Prerequisites</h2>
+      <p>
+        - Web API Project using .NET 6.0 or higher with OpenAPI enabled
+      </p>
+      <h2>Required Nuget Packages</h2>
+      <ul>
+        <li>
+          <a href="https://www.nuget.org/packages/Swashbuckle.AspNetCore/" target="_blank" class="article-link">Swashbuckle.AspNetCore</a>
+        </li>
+        <li>
+          <a href="https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer/" target="_blank" class="article-link">Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer </a>
+        </li>
+      </ul>
+      <h2>Provide OpenAPI Documentation in Existing Project</h2>
+      <p>
+        First step is to register some services in the existing project.
+        There are several extension methods which are used in our approach.
+      </p>
+      <ul>
+        <li>
+          <a href="../assets/ConfigureApiVersioning.cs" target="_blank" class="article-link">ConfigureApiVersioning.cs (optional)</a>
+        </li>
+        <li>
+          <a href="../assets/ConfigureSwaggerSwashbuckle.cs" target="_blank" class="article-link">ConfigureSwaggerSwashbuckle.cs</a>
+        </li>
+        <li>
+          <a href="../assets/ConfigureSwaggerSwashbuckleOptions.cs" target="_blank" class="article-link">ConfigureSwaggerSwashbuckleOptions.cs</a>
+        </li>
+      </ul>
+      <p>
+        We will now modify the Program.cs class with the extension methods from above.
+      </p>
+      <p>
+        "AddApiVersioningConfigured" (found in "ConfigureApiVersioning.cs") will support versioning on our documentation (don't implement if you
+        dont version your api) and "AddSwaggerSwashbuckleConfigured" 
+        (found in "ConfigureSwaggerSwashbuckle.cs") to configure the Swagger generator.
+      </p>
+      <pre>
+        <code class="code-block">
+            builder.Services.AddApiVersioningConfigured(); // only implement if you version your api
+            builder.Services.AddSwaggerSwashbuckleConfigured();
+        </code>
+      </pre>
+      <p>
+        We will now add the UseSwagger() middleware in our Program.cs class to serve OpenAPI definitions and UseSwaggerUi().
+      </p>
+      <pre>
+        <code class="code-block">
+          if (app.Environment.IsDevelopment())
+          {
+              // Enable middleware to serve the generated OpenAPI definition as JSON files.
+              app.UseSwagger();
+          
+          
+              // Enable middleware to serve Swagger-UI (HTML, JS, CSS, etc.) by specifying the Swagger JSON endpoint(s).
+              var descriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+              app.UseSwaggerUI(options =>
+              {
+                  // Build a swagger endpoint for each discovered API version
+                  foreach (var description in descriptionProvider.ApiVersionDescriptions)
+                  {
+                      options.SwaggerEndpoint($"{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                  }
+              });
+          }
+        </code>
+      </pre>
+      <h2>Documentation via XML Attributes</h2>
+      <p>
+        To enable XML Documentation in our project, you will need to adjust the project-name.csproj file.
+        When enabled, the compiler will automatically generate CS1591 warnings for any public members without XML documentation.
+        We will exclude these warnings.
+      </p>
+      <pre>
+        <code class="code-block">
+          &lt;PropertyGroup&gt;
+            &lt;GenerateDocumentationFile&gt;True&lt;/GenerateDocumentationFile&gt;
+            &lt;NoWarn&gt;$(NoWarn);1591&lt;/NoWarn&gt;
+          &lt;/PropertyGroup&gt;
+        </code>
+      </pre>
+      <p>
+        We are now able to add the XML comments to the controller actions using triple slashes.
+      </p>
+      <pre>
+        <code class="code-block">
+          /// &lt;summary&gt;
+          /// Get a list with all items.
+          /// &lt;/summary&gt;
+          [HttpGet]
+          public IActionResult Get()
+          {
+              // implementation here
+          }
+        </code>
+      </pre>
+      <h2>Documenting API Responeses / Codes</h2>
+      <p>
+        Consumers would need beneficial information about the HTTP status codes and their response body.
+        Therefore we install the Swashbuckle.AspNetCore.Annotations nuget package.
+      </p>
+      <ul>
+        <li>
+          <a href="https://www.nuget.org/packages/Swashbuckle.AspNetCore.Annotations/" target="_blank" class="article-link">Swashbuckle.AspNetCore.Annotations</a>
+        </li>
+      </ul>
+      <p>
+        This is how an implementation of documenting response codes would look like:
+      </p>
+      <pre>
+        <code class="code-block">
+          /// &lt;summary&gt;
+          /// Get a list with all items.
+          /// &lt;/summary&gt;
+          /// &lt;response code="200"&gt;Returns a list with the available sample responses.&lt;/response&gt;
+          [HttpGet]
+          public IActionResult Get()
+          {
+              // implementation here
+          }
+        </code>
+      </pre>
+    </article>
+  </main>
+  <footer>
+    &copy; 2023 Dario Krieger
+</footer>
+</body>
+</html>
