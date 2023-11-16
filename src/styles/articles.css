@@ -80,12 +80,16 @@ li {
     margin-bottom: 8px;
 }
 
-.code-block {
+#code-block {
     display: block;
-    background-color: #f7f7f7;
+    background-color: #f7f7f7 !important;
     padding: 10px;
     border-radius: 5px;
     overflow-x: auto;
+}
+
+.language-csharp {
+    background-color: transparent !important;
 }
 
 footer {
