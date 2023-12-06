@@ -135,13 +135,21 @@ public IActionResult Get()
       <pre>
         <code id="code-block" class="language-csharp">
 /// &lt;summary&gt;
-/// Get a list with all items.
+/// Updates an existing event.
 /// &lt;/summary&gt;
-/// &lt;response code="200"&gt;Returns a list with the available sample responses.&lt;/response&gt;
-[HttpGet]
-public IActionResult Get()
+/// &lt;param name="eventCode">Identifier of the event to be updated.&lt;/param&gt;
+/// &lt;param name="updatedEventDetails">Updated details for the event.&lt;/param&gt;
+/// &lt;response code="200">Event was successfully updated and gets displayed in the response.&lt;/response&gt;
+/// &lt;response code="400">Could not update the event.&lt;/response&gt;
+[HttpPut("{eventCode}")]
+[ProducesResponseType(StatusCodes.Status200OK)]
+[ProducesResponseType(StatusCodes.Status400BadRequest)]
+public ActionResult UpdateEvent(string eventCode, [FromBody, Required] EventDetails updatedEventDetails)
 {
-    // implementation here
+    var existingEvent = _eventManager.GetEventByCode(eventCode);
+    _eventManager.UpdateEvent(existingEvent, updatedEventDetails);
+
+    return Ok(existingEvent);
 }
         </code>
       </pre>
