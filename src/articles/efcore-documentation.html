@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/articles.css">
+    <title>EF Core Documentation - Dario Krieger</title>
+</head>
+<body>
+    <header>
+        <a href="../portfolio.html"><== back - dariokrie.dev</a>
+    </header>
+    <main>
+        <article>
+            <h1>Entity Framework Core Documentation</h1>
+            <h3>Using Visual C# and MSSQL</h3>
+            <p class="article-date">Published on December 9, 2023 by Dario Krieger</p>
+            <p>
+                Entity Framework (EF) is a powerful ORM (Object-Relational Mapping) framework used with Visual C#. It streamlines
+                database interactions by allowing developers to work with database entities as .NET objects, reducing the need
+                for direct SQL queries. EF simplifies database operations like querying, inserting, updating, and deleting data, abstracting
+                away much of the underlying complexity. With its code-first approach, developers can define the database schema using C# classes,
+                letting EF generate the necessary database structure automatically, fostering a more streamlined development process.
+            </p>
+            <h2>Code First Approach</h2>
+            <p>
+                <ol>
+                    <li>1. Create .NET Project</li>
+                    <li>2. Install NuGet Packages: EntityFrameworkCore.Design, EntityFrameworkCore.Tools, EntityFrameworkCore.SqlServer</li>
+                    <li>3. Clean Solution</li>
+                    <li>4. Define your objects as classes:</li>
+                    <pre>
+                    <code id="code-block" class="language-csharp">
+public class Customer
+{
+    public Guid Uid { get; set; }
+    public string FullName { get; set; }
+    public string Address { get; set; }
+    public List&lt;Orders&gt; { get; set; }
+
+}
+                    </code>
+                    </pre>
+                    <li>5. Create context class and save it to the "Models" folder with the objects from above:</li>
+                    <pre>
+                    <code id="code-block" class="language-csharp">
+public class ShopContext
+{
+    public DbSet&lt;Customer&gt; Customers { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(@"[YOUR DATABASE CONNECTION STRING]");
+    }
+}
+                    </code>
+                    </pre>
+                </ol>
+            </p>
+            <h2>Database First Approach</h2>
+            <p>
+                <ol>
+                    <li>1. Create database for example with SQL Server Management Studio</li>
+                    <li>2. Create .NET Project</li>
+                    <li>3. Install NuGet Packages: EntityFrameworkCore.Design, EntityFrameworkCore.Tools, EntityFrameworkCore.SqlServer</li>
+                    <li>4. Clean Solution</li>
+                    <li>5. Open Developer Powershell and execute the following command:</li>
+                    <pre>
+                    <code id="code-block">
+dotnet ef dbcontext scaffold "Server=[Server];Database=[DBName];Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -p [Project(.csproj file)] -f
+                    </code>
+                    </pre>
+                </ol>
+            </p>
+        </article>
+    </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-csharp.min.js"></script>
+</body>
+</html>
