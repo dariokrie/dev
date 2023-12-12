@@ -43,10 +43,10 @@ public class Customer
 }
                     </code>
                     </pre>
-                    <li>5. Create context class and save it to the "Models" folder with the objects from above:</li>
+                    <li>5. Create context class which inherits DbContext and save it to the "Models" folder with the objects from above:</li>
                     <pre>
                     <code id="code-block" class="language-csharp">
-public class ShopContext
+public class ShopContext : DbContext
 {
     public DbSet&lt;Customer&gt; Customers { get; set; }
 
