@@ -15,7 +15,7 @@
     <main>
         <article>
             <h1>Entity Framework Core Documentation</h1>
-            <h3>Using Visual C# and MSSQL</h3>
+            <h3>Using Visual C#, WEB API and MSSQL</h3>
             <p class="article-date">Published on December 9, 2023 by Dario Krieger</p>
             <p>
                 Entity Framework (EF) is a powerful ORM (Object-Relational Mapping) framework used with Visual C#. It streamlines
@@ -39,25 +39,57 @@ public class Customer
     public string FullName { get; set; }
     public string Address { get; set; }
     public List&lt;Orders&gt; { get; set; }
-
 }
                     </code>
                     </pre>
                     <li>5. Create context class which inherits DbContext and save it to the "Models" folder with the objects from above:</li>
                     <pre>
                     <code id="code-block" class="language-csharp">
-public class ShopContext : DbContext
+public partial class ShopContext : DbContext
 {
     public DbSet&lt;Customer&gt; Customers { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+}
+                    </code>
+                    </pre>
+                    <li>6. Create a context extension class:</li>
+                    <pre>
+                    <code id="code-block" class="language-csharp">
+public partial class ShopContext : IShopContext
+{
+    public ShopContext(DbContextOptions&lt;ShopContext&gt; options) : base(options)
     {
-        optionsBuilder.UseSqlServer(@"[YOUR DATABASE CONNECTION STRING]");
+        this.Database.EnsureCreated();
     }
 }
                     </code>
                     </pre>
-                </ol>
+                   <li>7. Define your connection string in appsettings.json:</li>
+                    <pre>
+                    <code id="code-block">
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+
+  "ConnectionStrings": {
+    "ConnectionString": "[YOUR_CONNECTION_STRING]"
+  }
+}
+
+                    </code>
+                    </pre>
+                    <li>8. Add these two lines of code in Program.cs main(string[] args) method:</li>
+                    <pre>
+                    <code id="code-block" class="language-csharp">
+var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
+builder.Services.AddDbContext<TicketShopContext>(_ => _.UseSqlServer(connectionString));
+                    </code>
+                    </pre>
+        </ol>
             </p>
             <h2>Database First Approach</h2>
             <p>
