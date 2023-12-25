@@ -32,12 +32,23 @@ Just moments after they have been signed off to Ho Chi Minh Airspace by Lumpur C
 
 Zaharie chose exactly this moment between the transition of two airspaces. Malaysian controllers had handed them off to vietnam and vietnamese controllers were busy with their aircrafts already in their airspace. 
 
-tbd: dissapearance between IGARI and BITOD by disabling TCAS and SATCOM
+At 01:21am Zaharie made his first move. The Boeing 777 is equipped with a transponder, satcom and vhf as every other commercial airliner. The transponder of the boeing 777 has multiple modes, relevant are the following modes: TA/RA, Off, Standby. To make an airliner dissappear, the transponder must be switched to the standby mode. To accomplish this, the pilot must physically turn a switch from the right hand side to the left hand side. That includes passing through the "Off" mode before the "Standby" mode can be set. 
+
+"TA/RA" tells the controllers exactly where the aircraft is and at which altitude it is situated. "Off" informs about the exact position of the aircraft, but not about the altitude. "Standby" will completly let the aircraft dissapear from the radar.
+
+It has been proven to be probable that a person in the flightdeck has manually switched the transponder to the standby mode. While switching the transponder to the standby mode, later the investigations recognised, that the altitude of the aircraft was displayed as 0 feet for a moment. This indicates that the transponder was switched manually to standby mode.
+
+Zaharie then turned off the SATCOM (Satelite communication) to ensure, that he could completly vanish without Malaysia Airlines noticing. SATCOM was the main source for tracking "ACARS" for Malaysia Airlines.
+
+tbd how was satcom disabled?
+
 ![Boeing 777 - GENERAL ANTENNA LOCATIONS](777ANTENNALOCATIONS.png)
 
 
 ## The Diversion
 tbd plausibilise the turn around of the flight route to direction indian ocean
+![The Diversion of MH370](mh370reporttrack.avif)
+
 
 ## First notices by Ho Chi Minh
 tbd
@@ -68,6 +79,7 @@ tbd why?
 - Analysis of Zaharie's simulator: https://s3.amazonaws.com/rootclaim-media/2016-11-29+Further+Analysis+of+Simulator+Data.pdf
 - https://en.wikipedia.org/wiki/Occam%27s_razor
 - 777 Antenna Locations: https://i0.wp.com/theaviationist.com/wp-content/uploads/2014/03/SATCOM.jpg?resize=678%2C381&ssl=1
+- Diversion: https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/03/04/17/mh370reporttrack.png?width=1200&height=1200&fit=crop
 
 ### Sharing Insights: My Motivation Behind Unveiling MH370's Mystery
 tbd
